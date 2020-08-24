@@ -16,8 +16,9 @@ if (getItem("usd")) {
 setInterval(function() {
     balance += 1;
     document.getElementById("bal").innerHTML = balance;
+    document.getElementById("usd").innerHTML = usd;
     localStorage.setItem("bal", balance);
-}, 1000);
+}, 500);
 
 function reset() {
     localStorage.setItem("usd", 0);
@@ -26,8 +27,8 @@ function reset() {
 }
 
 function convert() {
-    usd = balance
-    balance = 0
+    usd += Math.floor(balance / 3);
+    balance = 0;
     document.getElementById("usd").innerHTML = usd;
     document.getElementById("bal").innerHTML = balance;
     localStorage.setItem("usd", usd);

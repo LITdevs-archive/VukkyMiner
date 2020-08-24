@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <title>VukkyShop</title>
     <link rel="stylesheet" href="css/panel.css">
-    <script src="js/panel.js"></script>
+    <script src="js/store.js"></script>
   </head>
   <body>
-    <h1>VukkyShop!</h1>
-    Welcome! We don't have anything in store right now.<br><br>
+    <h1>VukkyShop</h1>
+    Welcome! <span id="amount">We'll check our stock now...</span><br><br>
+    <button id="vukkybutton" style="display:none;" onclick="buy('Vukky', 20)">Vukky (20 USD)</button><br><br>
     <button onclick="document.location.href = 'panel.html'">Go back to the panel</button>
   </body>
 </html>
