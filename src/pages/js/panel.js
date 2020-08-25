@@ -1,6 +1,7 @@
 var balance = 0;
 var usd = 0;
 var multiplier = getItem("Vukky") + getItem("Fall_Guy") * 2 + 1
+var conversionRate = 5;
 
 if (getItem("bal")) {
     balance = getItem("bal");
@@ -21,6 +22,12 @@ setInterval(function() {
     localStorage.setItem("bal", balance);
 }, 500);
 
+setInterval(function() {
+    conversionRate = 5 + Math.floor(Math.random() * 10);
+    document.getElementById("conversionRate").innerHTML = conversionRate;
+}, 10000);
+
+
 function reset() {
     localStorage.setItem("usd", 0);
     localStorage.setItem("bal", 0);
@@ -28,7 +35,7 @@ function reset() {
 }
 
 function convert() {
-    usd += Math.floor(balance / 3);
+    usd += Math.floor(balance / conversionRate);
     balance = 0;
     document.getElementById("usd").innerHTML = usd;
     document.getElementById("bal").innerHTML = balance;
