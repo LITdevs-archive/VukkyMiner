@@ -1,5 +1,6 @@
 var balance = 0;
 var usd = 0;
+var multiplier = getItem("Vukky") + getItem("Fall_Guy") * 2 + 1
 
 if (getItem("bal")) {
     balance = getItem("bal");
@@ -14,7 +15,7 @@ if (getItem("usd")) {
 }
 
 setInterval(function() {
-    balance += 1;
+    balance += multiplier;
     document.getElementById("bal").innerHTML = balance;
     document.getElementById("usd").innerHTML = usd;
     localStorage.setItem("bal", balance);
@@ -38,5 +39,6 @@ function convert() {
 function getItem(name) {
     var value = localStorage.getItem(name);
     if (value != null && !isNaN(Number(value))) return Number(value);
+    if (value == null) return null;
     else return value;
 }

@@ -1,20 +1,51 @@
 var usd = getItem("usd")
-
-setTimeout(() => {
-    if (usd > 19) {
-        document.getElementById("amount").innerHTML = "We have these items in stock:"
-        document.getElementById("vukkybutton").style.display = ""
-    } else {
-        document.getElementById("amount").innerHTML = "We don't have anything in stock! Come back later."
-    }
-}, 1000);
+var batchBuyEnabled = false;
 
 function buy(name, price) {
-    alert("That feature isn't available right now.")
+    var friendlyName = name.split("_").join(" ");
+    if(usd < price) {
+        return alert("You can't afford a " + friendlyName + ".")
+    }
+    var itemAmount = getItem(name)
+    if(!itemAmount) { var itemAmount = 0 }
+    if(batchBuyEnabled == false) {
+        singleBuy(friendlyName, itemAmount, name, price)
+    } else {
+        batchBuy(friendlyName, itemAmount, name, price)
+    }
+}
+
+function singleBuy(friendlyName, itemAmount, name, price) {
+    localStorage.setItem("usd", usd - price)
+    localStorage.setItem(name, itemAmount + 1)
+    usd = getItem("usd")
+    itemAmount += 1;
+    alert("Thank you for your purchase. You now have " + itemAmount + " " + friendlyName + "s.")
+}
+
+function batchBuy(friendlyName, itemAmount, name, price) {
+    while (usd > price) {
+        usd -= price;
+        itemAmount += 1;
+    }
+    localStorage.setItem("usd", usd)
+    localStorage.setItem(name, itemAmount)
+    alert("Thank you for your purchase. You now have " + itemAmount + " " + friendlyName + "s.")
+}
+
+function buyAllToggle(){
+    if(batchBuyEnabled == false) {
+        batchBuyEnabled = true;
+        document.getElementById("batchToggle").style["background-color"] = "#4CAF50"
+    } else {
+        batchBuyEnabled = false
+        document.getElementById("batchToggle").style["background-color"] = "red"
+    }
 }
 
 function getItem(name) {
     var value = localStorage.getItem(name);
     if (value != null && !isNaN(Number(value))) return Number(value);
+    if (value == null) return null;
     else return value;
 }
