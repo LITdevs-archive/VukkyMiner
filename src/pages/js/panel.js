@@ -15,7 +15,7 @@ if (getItem("usd")) {
     localStorage.setItem("usd", 0);
 }
 
-setInterval(function() {
+var balanceTicker = setInterval(function() {
     balance += multiplier;
     document.getElementById("bal").innerHTML = balance;
     document.getElementById("usd").innerHTML = usd;
@@ -29,8 +29,14 @@ setInterval(function() {
 
 
 function reset() {
+    clearInterval(balanceTicker)
+    var resetStoreItems = confirm("Do you want to reset items purchased from the VukkyStore too?")
     localStorage.setItem("usd", 0);
     localStorage.setItem("bal", 0);
+    if(resetStoreItems = true) {
+        localStorage.setItem("Vukky", 0);
+        localStorage.setItem("Fall_Guy", 0);
+    }
     document.location.reload();
 }
 

@@ -24,6 +24,7 @@ function singleBuy(friendlyName, itemAmount, name, price) {
 }
 
 function batchBuy(friendlyName, itemAmount, name, price) {
+    alert("Starting batch buy! Don't click anything after you click OK until you get the Thank you for your purchase message, or else things will go very wrong!")
     while (usd > price) {
         usd -= price;
         itemAmount += 1;
