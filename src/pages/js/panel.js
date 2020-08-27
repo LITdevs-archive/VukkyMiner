@@ -1,7 +1,12 @@
 var balance = 0;
 var usd = 0;
 var multiplier = getItem("Vukky") + getItem("Fall_Guy") * 2 + 1
-var conversionRate = 5;
+var conversionRate;
+conversionRate = 5 + Math.floor(Math.random() * 12);
+
+setTimeout(function() {
+    document.getElementById("conversionRate").innerHTML = conversionRate;
+}, 500);
 
 if (getItem("bal")) {
     balance = getItem("bal");
@@ -23,7 +28,7 @@ var balanceTicker = setInterval(function() {
 }, 500);
 
 setInterval(function() {
-    conversionRate = 5 + Math.floor(Math.random() * 10);
+    conversionRate = 5 + Math.floor(Math.random() * 12);
     document.getElementById("conversionRate").innerHTML = conversionRate;
 }, 10000);
 
